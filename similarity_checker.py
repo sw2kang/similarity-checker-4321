@@ -12,6 +12,9 @@ class SimilarityChecker:
     def check_length(self, word1, word2):
         self.check_validity(word1, word2)
 
+        if len(word1) > len(word2):
+            word1, word2 = word2, word1
+
         score = 60 - (len(word2) - len(word1)) * 60 / len(word1)
 
         return score

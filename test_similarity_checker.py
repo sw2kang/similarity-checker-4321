@@ -44,3 +44,4 @@ class TestSimilarityChecker(TestCase):
         self.length_score_check(('AB', 'CDEF'), 0)
         self.length_score_check(('ABCD', 'CDEF'), 60)
         self.length_score_check(('BBC', 'AAAAB'), 20)
+        self.length_score_check(('AAACC', 'BBB'), 20)
