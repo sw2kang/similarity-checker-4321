@@ -24,7 +24,7 @@ class TestSimilarityChecker(TestCase):
 
     def length_score_check(self, args, expected_score):
         actual_score = self.checker.check_length(*args)
-        self.assertEqual(actual_score, expected_score)
+        self.assertEqual(expected_score, actual_score)
 
     def test_failing_validity(self):
         self.validity_fail_check(('ab', 'cd'))
@@ -42,3 +42,4 @@ class TestSimilarityChecker(TestCase):
 
     def test_get_length_similarity(self):
         self.length_score_check(('AB', 'CDEF'), 0)
+        self.length_score_check(('ABCD', 'CDEF'), 60)
