@@ -27,6 +27,14 @@ class TestSimilarityChecker(TestCase):
         self.validity_fail_check(('ab',))
         self.validity_fail_check(('ab', 'cd', 'ef'))
         self.validity_fail_check(('ab', None))
+        self.validity_fail_check(('ABC',))
+        self.validity_fail_check(('ABC', 'BBC', 'CDE'))
 
     def test_passing_validity(self):
         self.validity_pass_check(('AB', 'CDEF'))
+        self.validity_pass_check(('ABCD', 'A'))
+
+    def test_get_length_similarity(self):
+        actual = self.checker.check_length('AB', 'CDEF')
+        expected = 0
+        self.assertEqual(actual, expected)
