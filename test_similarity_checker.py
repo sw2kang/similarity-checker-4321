@@ -9,33 +9,24 @@ class TestSimilarityChecker(TestCase):
         super().setUp()
         self.checker = SimilarityChecker()
 
-    def test_failing_validity(self):
+    def validity_fail_check(self, args):
         try:
-            self.checker.check_length('ab', 'cd')
+            self.checker.check_length(*args)
             self.fail()
         except TypeError:
             pass
 
+    def validity_pass_check(self, args):
         try:
-            self.checker.check_length('ab', 'cd', 'ef')
-            self.fail()
-        except TypeError:
-            pass
-
-        try:
-            self.checker.check_length('ab')
-            self.fail()
-        except TypeError:
-            pass
-
-        try:
-            self.checker.check_length('ab', None)
-            self.fail()
-        except TypeError:
-            pass
-
-    def test_passing_validity(self):
-        try:
-            self.checker.check_length('AB', 'CDEF')
+            self.checker.check_length(*args)
         except:
             self.fail()
+
+    def test_failing_validity(self):
+        self.validity_fail_check(('ab', 'cd'))
+        self.validity_fail_check(('ab',))
+        self.validity_fail_check(('ab', 'cd', 'ef'))
+        self.validity_fail_check(('ab', None))
+
+    def test_passing_validity(self):
+        self.validity_pass_check(('AB', 'CDEF'))
