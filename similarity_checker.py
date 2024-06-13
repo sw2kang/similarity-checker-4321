@@ -15,4 +15,6 @@ class SimilarityChecker:
         if len(word1) == len(word2):
             return 60
 
-        return 0
+        score = 60 - (len(word2) - len(word1)) * 60 / len(word1)
+
+        return score
