@@ -1,3 +1,6 @@
+MAX_COUNT_SCORE = 40
+
+
 class SimilarityChecker:
     def check_validity(self, word1, word2):
         for c in word1:
@@ -9,14 +12,15 @@ class SimilarityChecker:
         if len(word1) == 0 or len(word2) == 0:
             raise TypeError()
 
+    def get_count_score(self, word1, word2):
+        same_count = len(set(word1) & set(word2))
+        total_count = len(set(word1) | set(word2))
+        score = same_count * MAX_COUNT_SCORE / total_count
+        return score
+
     def check_count(self, word1, word2):
         self.check_validity(word1, word2)
 
-        word1_char_set = set(word1)
-        word2_char_set = set(word2)
-        same_count = len(word1_char_set & word2_char_set)
-        total_count = len(word1_char_set | word2_char_set)
-
-        score = same_count * 40 / total_count
+        score = self.get_count_score(word1, word2)
 
         return score
