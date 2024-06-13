@@ -29,6 +29,8 @@ class TestSimilarityChecker(TestCase):
         self.validity_fail_check(('ab', None))
         self.validity_fail_check(('ABC',))
         self.validity_fail_check(('ABC', 'BBC', 'CDE'))
+        self.validity_fail_check(('',''))
+        self.validity_fail_check(('ABC',''))
 
     def test_passing_validity(self):
         self.validity_pass_check(('AB', 'CDEF'))

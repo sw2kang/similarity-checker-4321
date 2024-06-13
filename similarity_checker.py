@@ -8,5 +8,8 @@ class SimilarityChecker:
             if not ord('A') <= ord(c) <= ord('Z'):
                 raise TypeError()
 
+        if len(word1) == 0 or len(word2) == 0:
+            raise TypeError()
+
         return 0
 
