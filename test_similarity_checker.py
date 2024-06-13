@@ -22,6 +22,10 @@ class TestSimilarityChecker(TestCase):
         except:
             self.fail()
 
+    def length_score_check(self, args, expected_score):
+        actual_score = self.checker.check_length(*args)
+        self.assertEqual(actual_score, expected_score)
+
     def test_failing_validity(self):
         self.validity_fail_check(('ab', 'cd'))
         self.validity_fail_check(('ab',))
@@ -29,14 +33,12 @@ class TestSimilarityChecker(TestCase):
         self.validity_fail_check(('ab', None))
         self.validity_fail_check(('ABC',))
         self.validity_fail_check(('ABC', 'BBC', 'CDE'))
-        self.validity_fail_check(('',''))
-        self.validity_fail_check(('ABC',''))
+        self.validity_fail_check(('', ''))
+        self.validity_fail_check(('ABC', ''))
 
     def test_passing_validity(self):
         self.validity_pass_check(('AB', 'CDEF'))
         self.validity_pass_check(('ABCD', 'A'))
 
     def test_get_length_similarity(self):
-        actual = self.checker.check_length('AB', 'CDEF')
-        expected = 0
-        self.assertEqual(actual, expected)
+        self.length_score_check(('AB', 'CDEF'), 0)
