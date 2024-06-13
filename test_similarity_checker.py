@@ -21,6 +21,10 @@ class TestSimilarityChecker(TestCase):
         except:
             self.fail()
 
+    def count_score_check(self, args, expected_score):
+        actual_score = self.checker.check_count(*args)
+        self.assertEqual(expected_score, actual_score)
+
     def test_count_failing_validity(self):
         self.count_validity_fail_check(('ab', 'cd'))
         self.count_validity_fail_check(('ab',))
@@ -34,3 +38,9 @@ class TestSimilarityChecker(TestCase):
     def test_count_passing_validity(self):
         self.count_validity_pass_check(('AB', 'CDEF'))
         self.count_validity_pass_check(('ABCD', 'A'))
+
+    def test_get_length_similarity(self):
+        self.count_score_check(('ASD', 'DSA'), 40)
+        self.count_score_check(('A', 'BB'), 0)
+        self.count_score_check(('AAAAAB', 'BBA'), 40)
+        self.count_score_check(('AA', 'AAE'), 20)
